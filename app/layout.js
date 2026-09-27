@@ -1,5 +1,18 @@
 import "./globals.css";
+import { Baloo_2, Inter } from "next/font/google";
 import { AuthProvider } from "../lib/AuthContext";
+
+const displayFont = Baloo_2({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-display",
+});
+
+const bodyFont = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
 
 export const metadata = {
   title: "Sri Ramanavami Chanda Tracker",
@@ -8,8 +21,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="bg-saffron-50 min-h-screen">
+    <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
+      <body className="font-sans text-maroon-800 min-h-screen">
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>

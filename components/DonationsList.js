@@ -58,16 +58,16 @@ export default function DonationsList({ donations, loading, isAdmin, onChange })
   }
 
   return (
-    <section className="bg-white rounded-xl shadow p-6 border border-saffron-100">
+    <section className="bg-cream-50 rounded-2xl shadow-temple p-6 border border-gold/30">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
-        <h2 className="text-lg font-semibold text-gray-800">
-          All Entries{" "}
-          <span className="text-gray-400 font-normal text-sm">
+        <h2 className="font-display text-xl font-semibold text-maroon-700">
+          All entries{" "}
+          <span className="text-maroon-400 font-normal text-sm font-sans">
             ({filtered.length} shown, total ₹{total.toLocaleString("en-IN")})
           </span>
         </h2>
         <input
-          className="border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-saffron-400"
+          className="border border-maroon-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-marigold-400 bg-white"
           placeholder="Search by name or phone..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -75,40 +75,44 @@ export default function DonationsList({ donations, loading, isAdmin, onChange })
       </div>
 
       {!isAdmin && (
-        <p className="text-xs text-gray-400 mb-3">
+        <p className="text-xs text-maroon-400 mb-3">
           You have view-only access. Only an admin can edit or delete entries.
         </p>
       )}
 
       {loading ? (
-        <p className="text-gray-500 text-sm">Loading...</p>
+        <p className="text-maroon-400 text-sm">Loading...</p>
       ) : filtered.length === 0 ? (
-        <p className="text-gray-500 text-sm">No entries yet.</p>
+        <p className="text-maroon-400 text-sm">No entries yet.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="text-left text-gray-500 border-b">
+              <tr className="text-left text-maroon-400 border-b border-gold/30">
                 <th className="py-2 pr-2">Image</th>
                 <th className="py-2 pr-2">Name</th>
                 <th className="py-2 pr-2">Phone</th>
                 <th className="py-2 pr-2">Amount</th>
-                <th className="py-2 pr-2">Date & Time</th>
+                <th className="py-2 pr-2">Method</th>
+                <th className="py-2 pr-2">Date & time</th>
                 {isAdmin && <th className="py-2 pr-2"></th>}
               </tr>
             </thead>
             <tbody>
               {filtered.map((d) => (
-                <tr key={d.id} className="border-b last:border-0 align-top">
+                <tr
+                  key={d.id}
+                  className="border-b border-gold/15 last:border-0 align-top"
+                >
                   <td className="py-2 pr-2">
                     {d.image_url ? (
                       <img
                         src={d.image_url}
                         alt=""
-                        className="w-10 h-10 rounded object-cover"
+                        className="w-10 h-10 rounded-lg object-cover border border-gold/30"
                       />
                     ) : (
-                      <span className="text-gray-300">-</span>
+                      <span className="text-maroon-200">-</span>
                     )}
                   </td>
 
@@ -116,14 +120,14 @@ export default function DonationsList({ donations, loading, isAdmin, onChange })
                     <>
                       <td className="py-2 pr-2 space-y-1">
                         <input
-                          className="border rounded px-2 py-1 w-28 block"
+                          className="border border-maroon-100 rounded px-2 py-1 w-28 block"
                           value={editForm.first_name}
                           onChange={(e) =>
                             setEditForm({ ...editForm, first_name: e.target.value })
                           }
                         />
                         <input
-                          className="border rounded px-2 py-1 w-28 block"
+                          className="border border-maroon-100 rounded px-2 py-1 w-28 block"
                           value={editForm.last_name}
                           onChange={(e) =>
                             setEditForm({ ...editForm, last_name: e.target.value })
@@ -132,7 +136,7 @@ export default function DonationsList({ donations, loading, isAdmin, onChange })
                       </td>
                       <td className="py-2 pr-2">
                         <input
-                          className="border rounded px-2 py-1 w-28"
+                          className="border border-maroon-100 rounded px-2 py-1 w-28"
                           value={editForm.phone}
                           onChange={(e) =>
                             setEditForm({ ...editForm, phone: e.target.value })
@@ -142,27 +146,30 @@ export default function DonationsList({ donations, loading, isAdmin, onChange })
                       <td className="py-2 pr-2">
                         <input
                           type="number"
-                          className="border rounded px-2 py-1 w-24"
+                          className="border border-maroon-100 rounded px-2 py-1 w-24"
                           value={editForm.amount}
                           onChange={(e) =>
                             setEditForm({ ...editForm, amount: e.target.value })
                           }
                         />
                       </td>
-                      <td className="py-2 pr-2 text-gray-500">
+                      <td className="py-2 pr-2 text-maroon-400 capitalize">
+                        {d.payment_method || "cash"}
+                      </td>
+                      <td className="py-2 pr-2 text-maroon-400">
                         {new Date(d.created_at).toLocaleString("en-IN")}
                       </td>
                       <td className="py-2 pr-2 space-x-2 whitespace-nowrap">
                         <button
                           onClick={() => saveEdit(d.id)}
                           disabled={savingEdit}
-                          className="text-green-600 text-xs font-medium"
+                          className="text-green-700 text-xs font-medium"
                         >
                           Save
                         </button>
                         <button
                           onClick={() => setEditingId(null)}
-                          className="text-gray-500 text-xs"
+                          className="text-maroon-400 text-xs"
                         >
                           Cancel
                         </button>
@@ -170,14 +177,27 @@ export default function DonationsList({ donations, loading, isAdmin, onChange })
                     </>
                   ) : (
                     <>
-                      <td className="py-2 pr-2 font-medium text-gray-800">
+                      <td className="py-2 pr-2 font-medium text-maroon-800">
                         {d.first_name} {d.last_name}
                       </td>
-                      <td className="py-2 pr-2 text-gray-600">{d.phone || "-"}</td>
-                      <td className="py-2 pr-2 text-gray-800">
+                      <td className="py-2 pr-2 text-maroon-500">
+                        {d.phone || "-"}
+                      </td>
+                      <td className="py-2 pr-2 text-maroon-800 font-medium">
                         ₹{Number(d.amount).toLocaleString("en-IN")}
                       </td>
-                      <td className="py-2 pr-2 text-gray-500">
+                      <td className="py-2 pr-2">
+                        <span
+                          className={`text-xs px-2 py-0.5 rounded-full ${
+                            d.payment_method === "upi"
+                              ? "bg-marigold-100 text-marigold-700"
+                              : "bg-green-100 text-green-700"
+                          }`}
+                        >
+                          {d.payment_method === "upi" ? "UPI" : "Cash"}
+                        </span>
+                      </td>
+                      <td className="py-2 pr-2 text-maroon-400">
                         {new Date(d.created_at).toLocaleString("en-IN")}
                       </td>
                       {isAdmin && (
@@ -190,7 +210,7 @@ export default function DonationsList({ donations, loading, isAdmin, onChange })
                           </button>
                           <button
                             onClick={() => handleDelete(d.id)}
-                            className="text-red-500 text-xs font-medium"
+                            className="text-maroon-500 text-xs font-medium"
                           >
                             Delete
                           </button>

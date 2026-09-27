@@ -35,32 +35,56 @@ export default function Home() {
     setListLoading(false);
   }
 
+  const total = donations.reduce((s, d) => s + Number(d.amount), 0);
+
   if (loading || !user) {
     return (
-      <div className="flex items-center justify-center min-h-screen text-gray-500">
+      <div className="flex items-center justify-center min-h-screen text-maroon-500">
         Loading...
       </div>
     );
   }
 
   return (
-    <main className="max-w-4xl mx-auto px-4 py-6">
-      <Navbar />
+    <main>
+      <div className="relative overflow-hidden bg-gradient-to-br from-maroon-700 via-maroon-500 to-marigold-500 pt-6 pb-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <Navbar />
+          <div className="text-center mt-10 mb-4">
+            <span className="text-4xl">🪔</span>
+            <h1 className="font-display text-4xl sm:text-5xl font-semibold text-cream mt-3">
+              Sri Ramanavami Chanda Tracker
+            </h1>
+            <p className="text-marigold-50 mt-2 max-w-md mx-auto">
+              Every rupee counted, every donor remembered.
+            </p>
+            <p className="text-marigold-50/90 mt-4 text-lg font-medium">
+              ₹{total.toLocaleString("en-IN")} collected so far
+            </p>
+          </div>
+        </div>
+        <svg
+          className="absolute bottom-0 left-0 w-full"
+          viewBox="0 0 1200 42"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,42 L0,10 L40,26 L80,10 L120,26 L160,10 L200,26 L240,10 L280,26 L320,10 L360,26 L400,10 L440,26 L480,10 L520,26 L560,10 L600,26 L640,10 L680,26 L720,10 L760,26 L800,10 L840,26 L880,10 L920,26 L960,10 L1000,26 L1040,10 L1080,26 L1120,10 L1160,26 L1200,10 L1200,42 Z"
+            fill="#FFF8ED"
+          />
+        </svg>
+      </div>
 
-      <h1 className="text-3xl font-bold text-saffron-700 text-center mt-6 mb-6">
-        🚩 Sri Ramanavami Chanda Tracker
-      </h1>
-
-      <Leaderboard donations={donations} />
-
-      <DonationForm userId={user.id} onAdded={fetchDonations} />
-
-      <DonationsList
-        donations={donations}
-        loading={listLoading}
-        isAdmin={isAdmin}
-        onChange={fetchDonations}
-      />
+      <div className="max-w-4xl mx-auto px-4 -mt-4 pb-10">
+        <Leaderboard donations={donations} />
+        <DonationForm userId={user.id} onAdded={fetchDonations} />
+        <DonationsList
+          donations={donations}
+          loading={listLoading}
+          isAdmin={isAdmin}
+          onChange={fetchDonations}
+        />
+      </div>
     </main>
   );
 }

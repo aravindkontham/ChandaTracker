@@ -52,17 +52,20 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4">
-      <div className="w-full max-w-sm bg-white rounded-xl shadow p-6 border border-saffron-100">
-        <h1 className="text-2xl font-bold text-saffron-700 text-center mb-1">
-          🚩 Chanda Tracker
-        </h1>
-        <p className="text-center text-gray-500 text-sm mb-6">
-          {mode === "signin" ? "Sign in to continue" : "Create an account"}
-        </p>
+    <main className="min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-maroon-700 via-maroon-500 to-marigold-500">
+      <div className="w-full max-w-sm bg-cream-50 rounded-2xl shadow-temple p-6 border border-gold/40">
+        <div className="text-center mb-6">
+          <span className="text-4xl">🪔</span>
+          <h1 className="font-display text-2xl font-semibold text-maroon-700 mt-2">
+            Chanda Tracker
+          </h1>
+          <p className="text-maroon-400 text-sm mt-1">
+            {mode === "signin" ? "Sign in to continue" : "Create an account"}
+          </p>
+        </div>
 
         {error && (
-          <p className="bg-red-50 text-red-700 text-sm rounded-lg px-3 py-2 mb-4">
+          <p className="bg-maroon-50 text-maroon-700 text-sm rounded-lg px-3 py-2 mb-4">
             {error}
           </p>
         )}
@@ -77,7 +80,7 @@ export default function LoginPage() {
             type="email"
             required
             placeholder="Email"
-            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-saffron-400"
+            className="w-full border border-maroon-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-marigold-400 bg-white"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -86,29 +89,29 @@ export default function LoginPage() {
             required
             minLength={6}
             placeholder="Password"
-            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-saffron-400"
+            className="w-full border border-maroon-100 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-marigold-400 bg-white"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <button
             type="submit"
             disabled={submitting}
-            className="w-full bg-saffron-600 hover:bg-saffron-700 text-white font-medium rounded-lg px-4 py-2 transition disabled:opacity-50"
+            className="w-full bg-gradient-to-r from-marigold-500 to-marigold-600 hover:from-marigold-600 hover:to-marigold-700 text-maroon-800 font-semibold rounded-lg px-4 py-2.5 transition disabled:opacity-50 shadow-temple-sm"
           >
             {submitting
               ? "Please wait..."
               : mode === "signin"
-              ? "Sign In"
-              : "Sign Up"}
+              ? "Sign in"
+              : "Sign up"}
           </button>
         </form>
 
-        <p className="text-center text-sm text-gray-500 mt-4">
+        <p className="text-center text-sm text-maroon-400 mt-4">
           {mode === "signin" ? (
             <>
               New here?{" "}
               <button
-                className="text-saffron-600 font-medium"
+                className="text-marigold-700 font-medium"
                 onClick={() => {
                   setMode("signup");
                   setError("");
@@ -122,7 +125,7 @@ export default function LoginPage() {
             <>
               Already have an account?{" "}
               <button
-                className="text-saffron-600 font-medium"
+                className="text-marigold-700 font-medium"
                 onClick={() => {
                   setMode("signin");
                   setError("");
