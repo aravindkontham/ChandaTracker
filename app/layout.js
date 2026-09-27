@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Baloo_2, Inter } from "next/font/google";
 import { AuthProvider } from "../lib/AuthContext";
+import BackgroundArt from "../components/BackgroundArt";
 
 const displayFont = Baloo_2({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <body className="font-sans text-maroon-800 min-h-screen">
+        <BackgroundArt />
         <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
