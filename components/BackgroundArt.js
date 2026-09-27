@@ -1,12 +1,25 @@
-// Purely decorative, original SVG background: soft lotus motifs in the
-// corners plus a faint temple-arch row, all in the site's own palette.
-// Fixed behind the page content, low opacity, so text always stays readable.
 export default function BackgroundArt() {
+  // Paste an image URL into NEXT_PUBLIC_BACKGROUND_IMAGE_URL (in .env.local
+  // and in Vercel's Environment Variables) to show it faintly behind the
+  // whole site. Leave it blank to keep just the lotus/arch pattern below.
+  const bgImage = process.env.NEXT_PUBLIC_BACKGROUND_IMAGE_URL;
+
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 -z-10 overflow-hidden pointer-events-none"
+      className="fixed inset-0 -z-20 overflow-hidden pointer-events-none"
     >
+      {bgImage && (
+        <>
+          <img
+            src={bgImage}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-top opacity-120"
+          />
+          {/* Keeps text readable over any photo */}
+          <div className="absolute inset-0 bg-cream/70" />
+        </>
+      )}
       {/* top-right lotus */}
       <svg
         viewBox="0 0 200 200"
