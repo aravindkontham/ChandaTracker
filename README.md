@@ -101,3 +101,7 @@ it to pause.
 
 `git add . && git commit -m "message" && git push` — Vercel redeploys
 automatically on every push to `main`.
+<img width="1359" height="610" alt="image" src="https://github.com/user-attachments/assets/01785978-0501-47fe-b1ee-7b4a85620f4c" />
+
+<img width="1337" height="593" alt="image" src="https://github.com/user-attachments/assets/73f22737-2473-4c82-8c97-6c46f51aa9b2" />
+
